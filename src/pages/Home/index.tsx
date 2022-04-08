@@ -1,7 +1,11 @@
+import { Dashboard } from "../../components/Dashboard";
+import { Header } from "../../components/Header";
+
 export function Home() {
   return (
     <>
-      <h1>teste</h1>
+      <Header />
+      <Dashboard />
     </>
   );
 }
