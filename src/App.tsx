@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SignIn } from './pages/SignIn'
+import { Toaster } from "react-hot-toast";
+import { SignIn } from "./pages/SignIn";
 
 function App() {
   return (
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route path="/" element={<SignIn />} />
       </Routes>
