@@ -3,7 +3,8 @@ import { Toaster } from "react-hot-toast";
 import { SignIn } from "./pages/SignIn";
 import { Home } from "./pages/Home";
 import { GlobalStyle } from "./styles/global";
-function App() {
+
+export function App() {
   return (
     <BrowserRouter>
       <Toaster />
