@@ -1,13 +1,15 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Background } from "../../components/Background";
 import { InputForm } from "../../components/InputForm";
 import { Title } from "../../components/Title";
 import { Container } from "./styles";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn } = useContext(AuthContext);
 
   async function validateForm() {
     if (email && password) {
@@ -15,7 +17,8 @@ export function SignIn() {
         email,
         password,
       };
-      console.log(data);
+      const res = await signIn(data);
+      console.log(res);
     } else {
       toast.error("Está faltando algumas informações.");
     }
