@@ -23,7 +23,7 @@ type RegisterCredentials = {
   email: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -31,8 +31,8 @@ type AuthProviderProps = {
 
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<boolean>;
-  register(credentials: RegisterCredentials): Promise<boolean>
-  getUserParams: () => void
+  register(credentials: RegisterCredentials): Promise<boolean>;
+  getUserParams: () => void;
   clearUserParams: () => void;
 };
 
@@ -45,13 +45,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     password,
     confirmPassword,
   }: RegisterProps) {
-    var request = { name, email, password, confirmPassword };
+    let request = { name, email, password, confirmPassword };
     const res = await api.post("user/register", request);
     return res.status === 200;
   }
 
   async function signIn({ email, password }: SignInProps) {
-    var request = { email, password };
+    let request = { email, password };
     const res = await api.post("token", request);
     if (res.status === 200) {
       localStorage.setItem("user-params", res.data.data);
