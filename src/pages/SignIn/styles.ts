@@ -5,22 +5,22 @@ export const Container = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
-  gap: 20px;
+  margin-top: 5rem;
+  gap: 1.25rem;
 
   button {
     max-width: 280px;
     width: 100%;
-    height: 55px;
+    height: 3.75rem;
     background: #7d6af2;
-    border-radius: 40px;
+    border-radius: 2.5rem;
     font-family: "Roboto";
     font-style: normal;
     font-weight: 900;
-    font-size: 18px;
-    line-height: 21px;
+    font-size: 1.125rem;
+    line-height: 1.313rem;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 2.5rem;
     color: #ffffff;
     transition: filter 0.2s;
 
