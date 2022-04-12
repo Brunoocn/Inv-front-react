@@ -1,15 +1,17 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Background } from "../../components/Background";
 import { InputForm } from "../../components/InputForm";
 import { Title } from "../../components/Title";
 import { Container } from "./styles";
 import toast from "react-hot-toast";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
+  const navigate = useNavigate();
+  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useContext(AuthContext);
 
   async function validateForm() {
     if (email && password) {
@@ -18,7 +20,9 @@ export function SignIn() {
         password,
       };
       const res = await signIn(data);
-      console.log(res);
+      if (res) {
+        navigate("/home");
+      }
     } else {
       toast.error("Está faltando algumas informações.");
     }
