@@ -55,15 +55,15 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
       </button>
 
       <Container onSubmit={handleCreateNewUser}>
-        <h2>Cadastrar usuário</h2>
+        <h2>Cadastrar Inventario</h2>
         <input
-          placeholder="Nome"
+          placeholder="Local"
           value={place}
           onChange={(event) => setPlace(event.target.value)}
         />
         <input
           placeholder="Volume"
-          type="text"
+          type="number"
           value={volume}
           onChange={(event) => setVolume(event.target.value)}
         />
@@ -75,7 +75,7 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
         />
         <input
           placeholder="Quantidade"
-          type="text"
+          type="number"
           value={quantity}
           onChange={(event) => setQuantity(event.target.value)}
         />
