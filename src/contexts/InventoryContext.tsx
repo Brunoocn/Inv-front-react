@@ -32,7 +32,7 @@ const InventoryProvider: React.FC = ({ children }) => {
     }
   });
 
-  function getUsers() {
+  function getInventorys() {
     if (
       localStorage.getItem("listaInventorys") !== "[]" &&
       localStorage.getItem("listaInventorys")
@@ -42,7 +42,7 @@ const InventoryProvider: React.FC = ({ children }) => {
   }
 
   document.addEventListener("DOMContentLoaded", function (event) {
-    getUsers();
+    getInventorys();
   });
 
   return (
