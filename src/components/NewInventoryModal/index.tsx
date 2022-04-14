@@ -1,17 +1,19 @@
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
+import toast from "react-hot-toast";
 
 import closeImg from "../../assets/close.svg";
 
+import { useInventory } from "../../hooks/useInventory";
 import { Container } from "./styles";
 
-// import toast from "react-hot-toast";
 interface NewUserModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
 export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
+  const { inventorys, setInventorys } = useInventory();
   const [place, setPlace] = useState("");
   const [volume, setVolume] = useState("");
   const [batch, setBatch] = useState("");
@@ -21,23 +23,23 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
     event.preventDefault();
   }
 
-  // function validateForm() {
-  //   if (name && cpf && email && phone) {
-  //     setUsers([
-  //       ...users,
-  //       {
-  //         id: Math.floor(Math.random() * (1000000 - 1) + 1),
-  //         name,
-  //         cpf,
-  //         email,
-  //         phone,
-  //       },
-  //     ]);
-  //     onRequestClose();
-  //   } else {
-  //     toast.error("Está faltando algumas informações.");
-  //   }
-  // }
+  function validateForm() {
+    if (place && volume && batch && quantity) {
+      setInventorys([
+        ...inventorys,
+        {
+          id: Math.floor(Math.random() * (1000000 - 1) + 1),
+          place,
+          volume,
+          batch,
+          quantity,
+        },
+      ]);
+      onRequestClose();
+    } else {
+      toast.error("Está faltando algumas informações.");
+    }
+  }
 
   return (
     <Modal
@@ -80,7 +82,9 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
           onChange={(event) => setQuantity(event.target.value)}
         />
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit" onClick={validateForm}>
+          Cadastrar
+        </button>
       </Container>
     </Modal>
   );

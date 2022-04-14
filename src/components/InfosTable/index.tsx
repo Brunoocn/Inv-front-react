@@ -1,8 +1,11 @@
 import deleteImg from "../../assets/delete.svg";
 import editImg from "../../assets/edit.svg";
+import { IInventory } from "../../contexts/InventoryContext";
+import { useInventory } from "../../hooks/useInventory";
 import { Container } from "./styles";
 
 export function InfosTable() {
+  const { inventorys } = useInventory();
   return (
     <Container>
       <table>
@@ -15,46 +18,32 @@ export function InfosTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Santo André</td>
-            <td>200kg</td>
-            <td>2302032</td>
-            <td>20</td>
-            <td className="icon-td">
-              <button>
-                <img src={editImg} alt="Deletar inventario" />
-              </button>
-              <button>
-                <img src={deleteImg} alt="Deletar inventario" />
-              </button>
-            </td>
-          </tr>
-          {/* {users && !usersIsLoading ? (
-            users.map((user: IUser, index: number) => {
+          {inventorys ? (
+            inventorys.map((inventory: IInventory, index: number) => {
               return (
                 <tr key={index}>
-                  <td>{user.name}</td>
-                  <td>{user.cpf}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone}</td>
+                  <td>{inventory.place}</td>
+                  <td>{inventory.volume}</td>
+                  <td>{inventory.batch}</td>
+                  <td>{inventory.quantity}</td>
                   <td className="icon-td">
-                    <button>
-                      <img src={deleteImg} alt="Deletar inventario" />
-                    </button>
+                    <td className="icon-td">
+                      <button>
+                        <img src={editImg} alt="Deletar inventario" />
+                      </button>
+                      <button>
+                        <img src={deleteImg} alt="Deletar inventario" />
+                      </button>
+                    </td>
                   </td>
                 </tr>
               );
             })
           ) : (
-            !usersIsLoading ? 
             <tr>
               <td>Nenhum usuário encontrado.</td>
             </tr>
-            : 
-            <tr>
-              <td>Carregando...</td>
-            </tr>
-          )} */}
+          )}
         </tbody>
       </table>
     </Container>

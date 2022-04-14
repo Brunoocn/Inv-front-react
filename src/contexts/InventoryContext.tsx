@@ -1,17 +1,11 @@
-import {
-  SetStateAction,
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import { SetStateAction, createContext, useState, useEffect } from "react";
 
 export type IInventory = {
   id: number;
   place: string;
-  volume: number;
+  volume: string;
   batch: string;
-  quantity: number;
+  quantity: string;
 };
 
 interface InventoryContextData {
@@ -19,10 +13,11 @@ interface InventoryContextData {
   setInventorys: (props: SetStateAction<IInventory[]>) => void;
 }
 
-const InventoryContext = createContext({} as InventoryContextData);
+export const InventoryContext = createContext({} as InventoryContextData);
 
-const InventoryProvider: React.FC = ({ children }) => {
+export const InventoryProvider: React.FC = ({ children }) => {
   const [inventorys, setInventorys] = useState<IInventory[]>([]);
+
   useEffect(() => {
     console.log("rodou useeffect");
     if (inventorys.length !== 0) {
@@ -56,15 +51,3 @@ const InventoryProvider: React.FC = ({ children }) => {
     </InventoryContext.Provider>
   );
 };
-
-function useInventory(): InventoryContextData {
-  const context = useContext(InventoryContext);
-
-  if (!context) {
-    throw new Error("useUser must be used within an InventoryProvider");
-  }
-
-  return context;
-}
-
-export { InventoryProvider, useInventory };
