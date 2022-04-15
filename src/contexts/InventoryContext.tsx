@@ -1,4 +1,4 @@
-import { SetStateAction, createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export type IInventory = {
   id: number;
@@ -10,41 +10,47 @@ export type IInventory = {
 
 interface InventoryContextData {
   inventorys: IInventory[];
-  setInventorys: (props: SetStateAction<IInventory[]>) => void;
+  pushInventory: (inventory: IInventory) => void;
 }
 
+const KEYINVENTORYS = "listaInventorys";
 export const InventoryContext = createContext({} as InventoryContextData);
 
 export const InventoryProvider: React.FC = ({ children }) => {
   const [inventorys, setInventorys] = useState<IInventory[]>([]);
 
   useEffect(() => {
-    console.log("rodou useeffect");
-    if (inventorys.length !== 0) {
-      localStorage.setItem("listaInventorys", JSON.stringify(inventorys));
-    } else if (inventorys.length === 0) {
-      localStorage.setItem("listaInventorys", JSON.stringify(inventorys));
+    const inventorysLocalStorage = localStorage.getItem(KEYINVENTORYS);
+    if (inventorysLocalStorage === null) {
+      setInventorys([]);
+    } else {
+      const inventorysObject = JSON.parse(inventorysLocalStorage);
+      setInventorys(inventorysObject);
     }
-  });
+  }, []);
 
-  function getInventorys() {
-    if (
-      localStorage.getItem("listaInventorys") !== "[]" &&
-      localStorage.getItem("listaInventorys")
-    ) {
-      setInventorys(JSON.parse(localStorage.getItem("listaUsers") || "[]"));
+  function pushInventory(inventory: IInventory) {
+    const inventorysLocalStorage = localStorage.getItem(KEYINVENTORYS);
+
+    if (inventorysLocalStorage === null) {
+      localStorage.setItem(KEYINVENTORYS, JSON.stringify([inventory]));
+      setInventorys([inventory]);
+    } else {
+      const inventorysArrayObject = JSON.parse(inventorysLocalStorage);
+      inventorysArrayObject.push(inventory);
+      localStorage.setItem(
+        KEYINVENTORYS,
+        JSON.stringify(inventorysArrayObject)
+      );
+      setInventorys(inventorysArrayObject);
     }
   }
-
-  document.addEventListener("DOMContentLoaded", function (event) {
-    getInventorys();
-  });
 
   return (
     <InventoryContext.Provider
       value={{
         inventorys,
-        setInventorys,
+        pushInventory,
       }}
     >
       {children}

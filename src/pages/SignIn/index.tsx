@@ -54,9 +54,9 @@ export function SignIn() {
           Entrar
         </button>
         <p>
-          Já tem uma conta? <br />
-          <Link to="/">
-            <span className="sign-in-link">Entre agora!</span>
+          Não tem uma conta? <br />
+          <Link to="/criarconta">
+            <span className="sign-in-link">Registre-se agora!</span>
           </Link>
         </p>
       </Container>

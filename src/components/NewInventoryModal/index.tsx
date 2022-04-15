@@ -13,7 +13,7 @@ interface NewUserModalProps {
 }
 
 export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
-  const { inventorys, setInventorys } = useInventory();
+  const { pushInventory } = useInventory();
   const [place, setPlace] = useState("");
   const [volume, setVolume] = useState("");
   const [batch, setBatch] = useState("");
@@ -25,16 +25,13 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
 
   function validateForm() {
     if (place && volume && batch && quantity) {
-      setInventorys([
-        ...inventorys,
-        {
-          id: Math.floor(Math.random() * (1000000 - 1) + 1),
-          place,
-          volume,
-          batch,
-          quantity,
-        },
-      ]);
+      pushInventory({
+        id: Math.floor(Math.random() * (1000000 - 1) + 1),
+        place,
+        volume,
+        batch,
+        quantity,
+      });
       onRequestClose();
     } else {
       toast.error("Está faltando algumas informações.");

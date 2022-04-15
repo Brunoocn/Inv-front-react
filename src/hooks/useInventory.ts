@@ -1,9 +1,9 @@
-import { SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import { IInventory, InventoryContext } from "../contexts/InventoryContext";
 
 interface InventoryContextData {
   inventorys: IInventory[];
-  setInventorys: (props: SetStateAction<IInventory[]>) => void;
+  pushInventory: (inventory: IInventory) => void;
 }
 
 export function useInventory(): InventoryContextData {

@@ -39,9 +39,14 @@ export const Container = styled.form`
     text-align: center;
     margin-bottom: 0;
 
-    .sign-in-link {
+    a {
       color: #7d6af2;
       text-decoration: none;
+      transition: filter 0.2s;
+
+      &:hover {
+      filter: brightness(0.9);
+    }
     }
   }
 `;
