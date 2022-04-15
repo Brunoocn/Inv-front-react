@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { GlobalStyle } from "./styles/global";
 import { AuthProvider } from "./contexts/AuthContext";
 import { InventoryProvider } from "./contexts/InventoryContext";
+import { SignUp } from "./pages/SignUp";
 
 export function App() {
   return (
@@ -14,7 +15,8 @@ export function App() {
           <Toaster />
           <Routes>
             <Route path="/" element={<SignIn />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/criarconta" element={<SignUp />} />
           </Routes>
           <GlobalStyle />
         </BrowserRouter>

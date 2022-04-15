@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Background } from "../../components/Background";
 import { InputForm } from "../../components/InputForm";
 import { Title } from "../../components/Title";
@@ -35,7 +35,7 @@ export function SignIn() {
   return (
     <>
       <Background />
-      <Title>Sign In</Title>
+      <Title>Entre com sua conta!</Title>
       <Container onSubmit={handleSubmit}>
         <InputForm
           type="email"
@@ -47,12 +47,18 @@ export function SignIn() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Senha"
         />
 
         <button type="submit" onClick={validateForm}>
-          Sign In
+          Entrar
         </button>
+        <p>
+          Já tem uma conta? <br />
+          <Link to="/">
+            <span className="sign-in-link">Entre agora!</span>
+          </Link>
+        </p>
       </Container>
     </>
   );
