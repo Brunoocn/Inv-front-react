@@ -21,7 +21,7 @@ export function SignIn() {
       };
       const res = await signIn(data);
       if (res) {
-        navigate("/home");
+        navigate("/dashboard");
       }
     } else {
       toast.error("Está faltando algumas informações.");

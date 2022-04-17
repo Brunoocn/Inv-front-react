@@ -27,14 +27,12 @@ export function InfosTable() {
                   <td>{inventory.batch}</td>
                   <td>{inventory.quantity}</td>
                   <td className="icon-td">
-                    <td className="icon-td">
-                      <button>
-                        <img src={editImg} alt="Deletar inventario" />
-                      </button>
-                      <button>
-                        <img src={deleteImg} alt="Deletar inventario" />
-                      </button>
-                    </td>
+                    <button>
+                      <img src={editImg} alt="Deletar inventario" />
+                    </button>
+                    <button>
+                      <img src={deleteImg} alt="Deletar inventario" />
+                    </button>
                   </td>
                 </tr>
               );

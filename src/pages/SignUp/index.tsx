@@ -16,7 +16,7 @@ export function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   async function validateForm() {
-    if (email && password) {
+    if (email && password && password && confirmPassword) {
       const data = {
         name,
         email,

@@ -6,6 +6,9 @@ import { GlobalStyle } from "./styles/global";
 import { AuthProvider } from "./contexts/AuthContext";
 import { InventoryProvider } from "./contexts/InventoryContext";
 import { SignUp } from "./pages/SignUp";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 export function App() {
   return (

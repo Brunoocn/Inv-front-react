@@ -7,12 +7,12 @@ import closeImg from "../../assets/close.svg";
 import { useInventory } from "../../hooks/useInventory";
 import { Container } from "./styles";
 
-interface NewUserModalProps {
+interface NewInventoryModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
+export function NewInventoryModal({ isOpen, onRequestClose }: NewInventoryModalProps) {
   const { pushInventory } = useInventory();
   const [place, setPlace] = useState("");
   const [volume, setVolume] = useState("");
@@ -23,15 +23,20 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
     event.preventDefault();
   }
 
-  function validateForm() {
+  async function validateForm() {
     if (place && volume && batch && quantity) {
-      pushInventory({
+      await pushInventory({
         id: Math.floor(Math.random() * (1000000 - 1) + 1),
         place,
         volume,
         batch,
         quantity,
       });
+
+      setPlace("");
+      setVolume("");
+      setBatch("");
+      setQuantity("");
       onRequestClose();
     } else {
       toast.error("Está faltando algumas informações.");
@@ -67,7 +72,7 @@ export function NewUserModal({ isOpen, onRequestClose }: NewUserModalProps) {
           onChange={(event) => setVolume(event.target.value)}
         />
         <input
-          placeholder="Email"
+          placeholder="Lote"
           type="text"
           value={batch}
           onChange={(event) => setBatch(event.target.value)}

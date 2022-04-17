@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Dashboard } from "../../components/Dashboard";
 import { Header } from "../../components/Header";
-import { NewUserModal } from "../../components/NewInventoryModal";
+import { NewInventoryModal } from "../../components/NewInventoryModal";
 
 export function Home() {
-  const [isNewInventoryModalOpen, setIsNewInventoryModalOpen] = useState(false);
+  const [isInventoryModalOpen, setIsInventoryModalOpen] = useState(false);
 
   function handleOpenNewInventoryModal() {
-    setIsNewInventoryModalOpen(true);
+    setIsInventoryModalOpen(true);
   }
 
   function handleCloseNewInventoryModal() {
-    setIsNewInventoryModalOpen(false);
+    setIsInventoryModalOpen(false);
   }
 
   return (
@@ -20,8 +20,8 @@ export function Home() {
 
       <Dashboard />
 
-      <NewUserModal
-        isOpen={isNewInventoryModalOpen}
+      <NewInventoryModal
+        isOpen={isInventoryModalOpen}
         onRequestClose={handleCloseNewInventoryModal}
       />
     </>
