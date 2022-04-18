@@ -32,6 +32,7 @@ type AuthProviderProps = {
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<boolean>;
   register(credentials: RegisterCredentials): Promise<boolean>;
+  signOut: () => void;
   getUserParams: () => void;
   clearUserParams: () => void;
 };
@@ -60,6 +61,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return false;
   }
 
+  async function signOut() {
+    localStorage.clear();
+    localStorage.removeItem("user-params");
+  }
+
   function getUserParams() {
     const userParams = localStorage.getItem("user-params");
     if (userParams) return JSON.parse(userParams);
@@ -71,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, register, getUserParams, clearUserParams }}
+      value={{ signIn, register, signOut, getUserParams, clearUserParams }}
     >
       {children}
     </AuthContext.Provider>

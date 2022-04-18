@@ -16,25 +16,6 @@ export const Content = styled.div`
     display: flex;
     gap: 30px;
 
-    .logout-btn {
-      font-size: 1rem;
-      color: #fff;
-      background: transparent;
-      border: 0;
-      padding: 0 1rem;
-      border-radius: 0.25rem;
-      height: 3rem;
-      
-      img {
-        width: 30px; 
-      }
-
-      @media (max-width: 767px) {
-        padding: 0 1.2rem;
-      }
-
-    }
-
     button {
       font-size: 1rem;
       color: #fff;
