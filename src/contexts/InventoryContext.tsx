@@ -1,7 +1,7 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, SetStateAction } from "react";
 
 export type IInventory = {
-  id: number;
+  id: any;
   place: string;
   volume: string;
   batch: string;
@@ -11,6 +11,8 @@ export type IInventory = {
 interface InventoryContextData {
   inventorys: IInventory[];
   pushInventory: (inventory: IInventory) => void;
+  setInventorys: (props: SetStateAction<IInventory[]>) => void;
+  deleteInventory: (inventoryId: any) => void;
 }
 
 const KEYINVENTORYS = "listaInventorys";
@@ -46,11 +48,41 @@ export const InventoryProvider: React.FC = ({ children }) => {
     }
   }
 
+  function deleteInventory(inventoryId: any) {
+    if (inventoryId === undefined) {
+      return;
+    }
+    const inventory = inventorys.find(
+      (inventory) => inventory.id === inventoryId
+    );
+    if (inventory === null) {
+      return;
+    } else {
+      const inventorysLocalStorage = localStorage.getItem(KEYINVENTORYS);
+      if (inventorysLocalStorage === null) {
+        return;
+      }
+      const inventorysArray = JSON.parse(inventorysLocalStorage);
+      const inventoryLocalStorage = inventorysArray.find(
+        (inventory: IInventory) => inventory.id === inventoryId
+      );
+      if (inventoryLocalStorage === null) {
+        return;
+      }
+      const index = inventorysArray.indexOf(inventoryLocalStorage);
+      inventorysArray.splice(index, 1);
+      localStorage.setItem(KEYINVENTORYS, JSON.stringify(inventorysArray));
+      setInventorys(inventorysArray);
+    }
+  }
+
   return (
     <InventoryContext.Provider
       value={{
         inventorys,
         pushInventory,
+        setInventorys,
+        deleteInventory,
       }}
     >
       {children}

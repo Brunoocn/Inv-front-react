@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect } from "react";
 import { api } from "../services/api";
 
 interface RegisterProps {
@@ -40,6 +40,14 @@ type AuthContextData = {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  useEffect(() => {
+    const userParams = localStorage.getItem("user-params");
+
+    if (!userParams) {
+    }
+
+    // se não logado verifica a pagina e se estiver em pagina não autorizada volta para o login
+  });
   async function register({
     name,
     email,

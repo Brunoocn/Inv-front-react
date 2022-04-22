@@ -85,13 +85,13 @@ export const GlobalStyle = createGlobalStyle`
       filter: brightness(0.8);
     }
 
-    .react-modal-delete-content {
-      width: 100%;
-      max-width: 590px;
-      background: var(--background);
-      padding: 3rem;
-      position: relative;
-      border-radius: 0.25rem;
-    }
+  }
+  .react-modal-delete-content {
+    width: 100%;
+    max-width: 590px;
+    background: var(--background);
+    padding: 5rem;
+    position: relative;
+    border-radius: 0.5rem;
   }
 `;

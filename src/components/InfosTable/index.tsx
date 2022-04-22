@@ -4,8 +4,14 @@ import { IInventory } from "../../contexts/InventoryContext";
 import { useInventory } from "../../hooks/useInventory";
 import { Container } from "./styles";
 
-export function InfosTable() {
+interface TableProps {
+  onOpenDeleteInventoryModal: () => void;
+  onClickDelete: (inventory: IInventory) => void;
+}
+
+export function InfosTable({ onClickDelete }: TableProps) {
   const { inventorys } = useInventory();
+
   return (
     <Container>
       <table>
@@ -30,7 +36,12 @@ export function InfosTable() {
                     <button>
                       <img src={editImg} alt="Deletar inventario" />
                     </button>
-                    <button>
+
+                    <button
+                      onClick={() => {
+                        onClickDelete(inventory);
+                      }}
+                    >
                       <img src={deleteImg} alt="Deletar inventario" />
                     </button>
                   </td>
@@ -39,7 +50,7 @@ export function InfosTable() {
             })
           ) : (
             <tr>
-              <td>Nenhum usuário encontrado.</td>
+              <td>Nenhum inventario encontrado.</td>
             </tr>
           )}
         </tbody>

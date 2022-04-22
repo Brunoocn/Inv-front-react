@@ -5,24 +5,30 @@ import { NewInventoryModal } from "../../components/NewInventoryModal";
 
 export function Home() {
   const [isInventoryModalOpen, setIsInventoryModalOpen] = useState(false);
+  const [isDeleteInventoryModalOpen, setIsDeleteInventoryModalOpen] =
+    useState(false);
 
-  function handleOpenNewInventoryModal() {
+  function handleOpenInventoryModal() {
     setIsInventoryModalOpen(true);
   }
 
-  function handleCloseNewInventoryModal() {
+  function handleCloseInventoryModal() {
     setIsInventoryModalOpen(false);
+  }
+
+  function handleOpenDeleteInventoryModal() {
+    setIsDeleteInventoryModalOpen(true);
   }
 
   return (
     <>
-      <Header onOpenNewInventoryModal={handleOpenNewInventoryModal} />
+      <Header onOpenNewInventoryModal={handleOpenInventoryModal} />
 
-      <Dashboard />
+      <Dashboard onOpenDeleteInventoryModal={handleOpenDeleteInventoryModal} />
 
       <NewInventoryModal
         isOpen={isInventoryModalOpen}
-        onRequestClose={handleCloseNewInventoryModal}
+        onRequestClose={handleCloseInventoryModal}
       />
     </>
   );

@@ -12,7 +12,10 @@ interface NewInventoryModalProps {
   onRequestClose: () => void;
 }
 
-export function NewInventoryModal({ isOpen, onRequestClose }: NewInventoryModalProps) {
+export function NewInventoryModal({
+  isOpen,
+  onRequestClose,
+}: NewInventoryModalProps) {
   const { pushInventory } = useInventory();
   const [place, setPlace] = useState("");
   const [volume, setVolume] = useState("");
