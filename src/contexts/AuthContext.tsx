@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 
 interface RegisterProps {
@@ -33,21 +33,27 @@ type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<boolean>;
   register(credentials: RegisterCredentials): Promise<boolean>;
   signOut: () => void;
-  getUserParams: () => void;
+  getUserParams: () => { email: string };
   clearUserParams: () => void;
+  getUserEmail: () => string | null;
+  isLoggedIn: boolean;
 };
 
+const KEYAUTH = "user-params";
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  useEffect(() => {
-    const userParams = localStorage.getItem("user-params");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    if (!userParams) {
+  useEffect(() => {
+    const userParams = localStorage.getItem(KEYAUTH);
+
+    if (userParams) {
+      setIsLoggedIn(true);
     }
 
     // se não logado verifica a pagina e se estiver em pagina não autorizada volta para o login
-  });
+  }, []);
   async function register({
     name,
     email,
@@ -63,7 +69,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     let request = { email, password };
     const res = await api.post("token", request);
     if (res.status === 200) {
-      localStorage.setItem("user-params", res.data.data);
+      localStorage.setItem(KEYAUTH, JSON.stringify(res.data.data));
       return true;
     }
     return false;
@@ -71,21 +77,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signOut() {
     localStorage.clear();
-    localStorage.removeItem("user-params");
+    localStorage.removeItem(KEYAUTH);
   }
 
   function getUserParams() {
-    const userParams = localStorage.getItem("user-params");
+    const userParams = localStorage.getItem(KEYAUTH);
     if (userParams) return JSON.parse(userParams);
   }
 
   function clearUserParams() {
-    localStorage.removeItem("user-params");
+    localStorage.removeItem(KEYAUTH);
+  }
+
+  function getUserEmail() {
+    const userParams = getUserParams();
+    if (userParams === null) return null;
+    return userParams.email;
+
   }
 
   return (
     <AuthContext.Provider
-      value={{ signIn, register, signOut, getUserParams, clearUserParams }}
+      value={{ signIn, register, signOut, getUserParams, clearUserParams, getUserEmail, isLoggedIn }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,7 +1,9 @@
 import { createContext, useState, useEffect, SetStateAction } from "react";
+// import { useAuth } from "../hooks/useAuth";
 
 export type IInventory = {
   id: any;
+  user: string | null;
   place: string;
   volume: string;
   batch: string;
@@ -13,6 +15,7 @@ interface InventoryContextData {
   pushInventory: (inventory: IInventory) => void;
   setInventorys: (props: SetStateAction<IInventory[]>) => void;
   deleteInventory: (inventoryId: any) => void;
+  // getInventorys: () => IInventory[];
 }
 
 const KEYINVENTORYS = "listaInventorys";
@@ -20,6 +23,8 @@ export const InventoryContext = createContext({} as InventoryContextData);
 
 export const InventoryProvider: React.FC = ({ children }) => {
   const [inventorys, setInventorys] = useState<IInventory[]>([]);
+  // const { getUserEmail, getUserParams } = useAuth()
+
 
   useEffect(() => {
     const inventorysLocalStorage = localStorage.getItem(KEYINVENTORYS);
@@ -31,9 +36,16 @@ export const InventoryProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  function pushInventory(inventory: IInventory) {
-    const inventorysLocalStorage = localStorage.getItem(KEYINVENTORYS);
 
+  // function getInventorys() {
+  //   const userEmail = getUserParams();
+  //   return inventorys.filter((inventory) => inventory.user === userEmail.email)
+  // }
+
+  function pushInventory(inventory: IInventory) {
+    // const userEmail = getUserParams();
+    // inventory.user = userEmail.email;
+    const inventorysLocalStorage = localStorage.getItem(KEYINVENTORYS);
     if (inventorysLocalStorage === null) {
       localStorage.setItem(KEYINVENTORYS, JSON.stringify([inventory]));
       setInventorys([inventory]);
@@ -83,6 +95,7 @@ export const InventoryProvider: React.FC = ({ children }) => {
         pushInventory,
         setInventorys,
         deleteInventory,
+        // getInventorys
       }}
     >
       {children}

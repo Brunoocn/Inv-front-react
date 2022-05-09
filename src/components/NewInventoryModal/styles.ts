@@ -27,7 +27,6 @@ export const Container = styled.form`
       margin-top: 1rem;
     }
   }
-
   button[type="submit"] {
     width: 100%;
     padding: 0 1.5rem;

@@ -30,6 +30,7 @@ export function NewInventoryModal({
     if (place && volume && batch && quantity) {
       await pushInventory({
         id: Math.floor(Math.random() * (1000000 - 1) + 1),
+        user: null,
         place,
         volume,
         batch,
